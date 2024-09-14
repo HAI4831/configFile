@@ -1,0 +1,34 @@
+jwt:
+    expiration-in-ms: 3600000
+    password: abCD@1234
+    refreshable-duration: 3600000
+    valid-duration: 300000
+logging:
+    level:
+        io:
+            r2dbc:
+                postgresql: DEBUG
+        org:
+            springframework:
+                data:
+                    r2dbc: DEBUG
+server:
+    port: 8806
+spring:
+    application:
+        name: IdentityService
+    main:
+        allow-bean-definition-overriding: true
+        web-application-type: reactive
+    r2dbc:
+        password: abCD@1234
+        pool:
+            initial-size: 10
+            max-size: 20
+        url: r2dbc:postgresql://localhost:5432/distributedsystem
+        username: distributedsystem
+    sql:
+        init:
+            data-locations: classpath:data.sql
+            mode: always
+            schema-locations: classpath:schema.sql

@@ -1,0 +1,17 @@
+server:
+    port: 8810
+spring:
+    application:
+        name: NotificationService
+    r2dbc:
+        password: abCD@1234
+        pool:
+            initial-size: 10
+            max-size: 20
+        url: r2dbc:postgresql://localhost:5432/distributedsystem
+        username: distributedsystem
+    sql:
+        init:
+            data-locations: classpath:data.sql
+            mode: always
+            schema-locations: classpath:schema.sql

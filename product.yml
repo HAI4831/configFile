@@ -1,0 +1,45 @@
+server:
+    port: 8802
+spring:
+    application:
+        name: productservice
+    r2dbc:
+        password: abCD@1234
+        pool:
+            initial-size: 10
+            max-size: 20
+        url: r2dbc:postgresql://localhost:5432/distributedsystem
+        username: distributedsystem
+    sql:
+        init:
+            data-locations: classpath:data.sql
+            mode: always
+            schema-locations: classpath:schema.sql
+#    spring.application.name=productservice
+#
+#  # Eureka Client Configuration
+#    server.port=8802
+#  #eureka.client.service-url.default-zone=http://localhost:8761/eureka
+#
+#  # Kafka Configuration
+#  #spring.kafka.bootstrap-servers=localhost:9092
+#  #spring.kafka.consumer.group-id=group_id
+#
+#  #kafka.bootstrap-servers=localhost:9092
+#  #kafka.consumer.group-id=my-group
+#
+#  #spring.kafka.bootstrap-servers=localhost:9092
+#  #spring.kafka.consumer.group-id=group_id
+#  #spring.kafka.consumer.auto-offset-reset=earliest
+#  #spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+#  #spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+#
+#  #sql r2dbc postgre config
+#    spring.sql.init.schema-locations=classpath:schema.sql
+#    spring.sql.init.data-locations=classpath:data.sql
+#    spring.sql.init.mode=always
+#    spring.r2dbc.url=r2dbc:postgresql://localhost:5432/distributedsystem
+#    spring.r2dbc.username=distributedsystem
+#    spring.r2dbc.password=abCD@1234
+#    spring.r2dbc.pool.initial-size=10
+#    spring.r2dbc.pool.max-size=20

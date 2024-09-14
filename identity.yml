@@ -1,0 +1,125 @@
+jwt:
+    expiration-in-ms1: 3600000
+    password: abCD@1234
+    refreshable-duration: 3600000
+    valid-duration: 300000
+logging:
+    level:
+        io:
+            r2dbc: info
+            r2dbc.io.r2dbc.postgresql: info
+        org:
+            springframework:
+                core:
+                    codec: info
+                    convert: TRACE
+                security: info
+                web:
+                    reactive: info
+        reactor:
+            netty:
+                http:
+                    client: info
+                    server: info
+management:
+    tracing:
+        enabled: true
+server:
+    port: 8806
+spring:
+    application:
+        name: IdentityService
+    main:
+        allow-bean-definition-overriding: true
+        web-application-type: reactive
+    r2dbc:
+        password: abCD@1234
+        pool:
+            initial-size: 10
+            max-size: 20
+        url: r2dbc:postgresql://localhost:5432/distributedsystem
+        username: distributedsystem
+    sql:
+        init:
+            data-locations: classpath:data.sql
+            mode: always
+            schema-locations: classpath:schema.sql
+    zipkin:
+        base-url: http://localhost:9411
+        enabled: true
+##application.properties
+#    spring.application.name=IdentityService
+#  #jwt.private-key=classpath:private_key.pem
+#  #jwt.public-Key=classpath:public_key.pem
+#    server.port=8806
+#    spring.main.allow-bean-definition-overriding=true
+#    jwt.refreshable-duration=3600000
+#    jwt.valid-duration=300000
+#  # 1 hour
+#    jwt.expiration-in-ms1=3600000
+#    jwt.password=abCD@1234
+#
+#  #sql config
+#    spring.sql.init.schema-locations=classpath:schema.sql
+#    spring.sql.init.data-locations=classpath:data.sql
+#    spring.sql.init.mode=always
+#    spring.r2dbc.url=r2dbc:postgresql://localhost:5432/distributedsystem
+#    spring.r2dbc.username=distributedsystem
+#    spring.r2dbc.password=abCD@1234
+#    spring.r2dbc.pool.initial-size=10
+#    spring.r2dbc.pool.max-size=20
+#
+#  #logging.level.io.r2dbc= DEBUG
+#  #logging.level.io.r2dbc.io.r2dbc.postgresql: DEBUG
+#  ## application.properties
+#  #spring.main.web-application-type=reactive
+#  ##
+#  ##logging.level.org.springframework.web=DEBUG
+#  ##logging.level.org.springframework.core.convert=TRACE
+#  ##logging.level.org.springframework.http.converter=DEBUG
+#  #
+#  #logging.level.org.springframework.web.reactive=DEBUG
+#  #logging.level.org.springframework.core.codec=TRACE
+#  #logging.level.reactor.netty.http.server=DEBUG
+#  #logging.level.reactor.netty.http.client=DEBUG
+#  #
+#  #logging.level.org.springframework.security: DEBUG
+#  #logging.level.org.springframework.core.convert: TRACE
+#    logging.level.io.r2dbc= info
+#    logging.level.io.r2dbc.io.r2dbc.postgresql= info
+#  # application.properties
+#    spring.main.web-application-type=reactive
+#  #
+#  #logging.level.org.springframework.web=DEBUG
+#  #logging.level.org.springframework.core.convert=TRACE
+#  #logging.level.org.springframework.http.converter=DEBUG
+#
+#    logging.level.org.springframework.web.reactive=info
+#    logging.level.org.springframework.core.codec=info
+#    logging.level.reactor.netty.http.server=info
+#    logging.level.reactor.netty.http.client=info
+#
+#    logging.level.org.springframework.security= info
+#    logging.level.org.springframework.core.convert= TRACE
+#
+#  #trace config for sleuth
+#  #spring.sleuth.sampler.probability= 1.0
+#  #spring.sleuth.log.slf4j.enabled=true
+#  #log.logger.level=DEBUG
+#    spring.zipkin.base-url= http://localhost:9411
+#    spring.zipkin.enabled= true
+#    management.tracing.enabled=true
+## This configures the Zipkin tracing backend
+##management.tracing.zipkin.enabled: true
+##management.tracing.zipkin.endpoint: http://localhost:9411/api/v2/spans
+#
+##disable-axoniq-console-message=true
+
+
+
+
+
+
+
+
+

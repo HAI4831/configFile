@@ -1,0 +1,37 @@
+#server:
+#  port: 8808
+
+spring:
+  application:
+    name: CategoryService
+  sql:
+    init:
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      mode: always
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/distributedsystem
+    username: distributedsystem
+    password: abCD@1234
+    pool:
+      initial-size: 10
+      max-size: 20
+
+# Kafka configuration
+# kafka:
+#   bootstrap-servers: localhost:9092
+#   group-id: my-group
+#server.port=8808
+#spring.application.name=CategoryService
+#spring.sql.init.schema-locations=classpath:schema.sql
+#spring.sql.init.data-locations=classpath:data.sql
+#spring.sql.init.mode=always
+#spring.r2dbc.url=r2dbc:postgresql://localhost:5432/distributedsystem
+#spring.r2dbc.username=distributedsystem
+#spring.r2dbc.password=abCD@1234
+#spring.r2dbc.pool.initial-size=10
+#spring.r2dbc.pool.max-size=20
+
+#kafka config
+#kafka.bootstrap-servers=localhost:9092
+#kafka.group-id=my-group

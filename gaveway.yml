@@ -1,0 +1,184 @@
+spring:
+  application:
+    name: gatewayService1
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/distributedsystem
+    username: distributedsystem
+    password: abCD@1234
+    pool:
+      initial-size: 10
+      max-size: 20
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: userservice
+          uri: lb://USERSERVICE
+          predicates:
+            - Path=/users/**
+          filters:
+            - name: Hystrix
+              args:
+                name: userservice
+                execution.isolation.thread.timeoutInMilliseconds: 10000
+        - id: orderservice
+          uri: lb://ORDERSERVICE
+          predicates:
+            - Path=/order/**
+          filters:
+            - name: Hystrix
+              args:
+                name: order-service
+        - id: BookService
+          uri: lb://BOOKSERVICE
+          predicates:
+            - Path=/book/**
+          filters:
+            - name: Hystrix
+              args:
+                name: book-service
+        - id: productservice
+          uri: lb://PRODUCTSERVICE
+          predicates:
+            - Path=/product/**
+          filters:
+            - name: Hystrix
+              args:
+                name: product-service
+        - id: userservice2
+          uri: lb://USERSERVICE2
+          predicates:
+            - Path=/user/**
+          filters:
+            - name: Hystrix
+              args:
+                name: user-service
+
+server:
+  port: 8762
+  http:
+    port: 8762
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
+
+logging:
+  level:
+    com:
+      netflix:
+        discovery: DEBUG
+    org:
+      springframework:
+        cloud:
+          netflix:
+            eureka: DEBUG
+
+management:
+  tracing:
+    enabled: true
+
+
+#spring.application.name=gatewayService1
+##server.port=8080
+## default port for eureka server
+#server.port=8762
+#server.http.port=8762
+#spring.cloud.gateway.discovery.locator.enabled=true
+#spring.cloud.gateway.discovery.locator.lower-case-service-id=true
+#
+#spring.cloud.gateway.routes[0].id=userservice
+#spring.cloud.gateway.routes[0].uri=lb://USERSERVICE
+#spring.cloud.gateway.routes[0].predicates[0]=Path=/users/**
+#spring.cloud.gateway.routes[0].filters.name= Hystrix
+#spring.cloud.gateway.routes[0].filters.args.name=userservice
+##spring.cloud.gateway.routes[0].filters.args.fallbackUri=forward:/fallback
+#spring.cloud.gateway.routes[0].filters.args.execution.isolation.thread.timeoutInMilliseconds: 10000
+#
+#spring.cloud.gateway.routes[1].id=orderservice
+#spring.cloud.gateway.routes[1].uri=lb://ORDERSERVICE
+#spring.cloud.gateway.routes[1].predicates[0]=Path=/order/**
+#spring.cloud.gateway.routes[1].filters.name= Hystrix
+#spring.cloud.gateway.routes[1].filters.args.name=order-service
+##spring.cloud.gateway.routes[1].filters.args.fallbackUri=forward:/fallback
+#
+#spring.cloud.gateway.routes[2].id=BookService
+#spring.cloud.gateway.routes[2].uri=lb://BOOKSERVICE
+#spring.cloud.gateway.routes[2].predicates[0]=Path=/book/**
+#spring.cloud.gateway.routes[2].filters.name=Hystrix
+#spring.cloud.gateway.routes[2].filters.args.name=book-service
+##spring.cloud.gateway.routes[2].filters.args.fallbackUri=forward:/fallback
+#
+#spring.cloud.gateway.routes[3].id=productservice
+#spring.cloud.gateway.routes[3].uri=lb://PRODUCTSERVICE
+#spring.cloud.gateway.routes[3].predicates[0]=Path=/product/**
+#spring.cloud.gateway.routes[3].filters.name=Hystrix
+#spring.cloud.gateway.routes[3].filters.args.name=product-service
+##spring.cloud.gateway.routes[3].filters.args.fallbackUri=forward:/fallback
+#
+#spring.cloud.gateway.routes[4].id=userservice2
+#spring.cloud.gateway.routes[4].uri=lb://USERSERVICE2
+#spring.cloud.gateway.routes[4].predicates[0]=Path=/user/**
+#spring.cloud.gateway.routes[4].filters.name= Hystrix
+#spring.cloud.gateway.routes[4].filters.args.name=user-service
+##spring.cloud.gateway.routes[4].filters.args.fallbackUri=forward:/fallback
+#
+#
+#eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+##pring.cloud.eureka.instance.hostname=localhost
+##spring.cloud.eureka.instance.prefer-ip-address=true
+## /eureka/
+#eureka.instance.prefer-ip-address=true
+#jwt.secret=BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
+#
+#logging.level.com.netflix.discovery=DEBUG
+#logging.level.org.springframework.cloud.netflix.eureka=DEBUG
+##
+###c?u hình chung cho gateway
+##spring.cloud.gateway.default-filters[0]=DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+##spring.cloud.gateway.httpclient.connect-timeout=5000
+##spring.cloud.gateway.httpclient.response-timeout=20000
+###C?u hình Circuit Breaker (Hystrix)
+##spring.cloud.gateway.routes[0].filters[1].name=Hystrix
+##spring.cloud.gateway.routes[0].filters[1].args.name=user-service-cb
+##spring.cloud.gateway.routes[0].filters[1].args.fallbackUri=forward:/fallback
+###C?u hình Rate Limiting
+##spring.cloud.gateway.routes[0].filters[2].name=RequestRateLimiter
+##spring.cloud.gateway.routes[0].filters[2].args.redis-rate-limiter.replenishRate=10
+##spring.cloud.gateway.routes[0].filters[2].args.redis-rate-limiter.burstCapacity=20
+###C?u hình Load Balancer
+##spring.cloud.loadbalancer.enabled=true
+##
+##spring.cache.type= caffeine
+##spring.cache.type.caffeine.cache-spec: maximumSize=1000,expireAfterWrite=5m
+##
+###ssl config
+##server.ssl.key-store=classpath:KeyStore.jks
+##server.ssl.key-store-password=abCD@1234
+###logging
+##logging.level.org.springframework.cloud.gateway=DEBUG
+##logging.file.name=gateway.log
+##
+##
+#management.tracing.enabled= true
+##spring.security.oauth2.resourceserver.jwt.issuer-uri: https://idp.example.com/issuer #where save public key for auth2
+##spring.security.oauth2.resourceserver.jwt.jwk-set-uri: https://idp.example.com/.well-known/jwks.json
+##spring.security.oauth2.resourceserver.jwt. audiences: https://my-resource-server.example.com
+#
+##spring.sql.init.schema-locations=classpath:schema.sql
+##spring.sql.init.data-locations=classpath:data.sql
+##spring.sql.init.mode=always
+#spring.r2dbc.url=r2dbc:postgresql://localhost:5432/distributedsystem
+#spring.r2dbc.username=distributedsystem
+#spring.r2dbc.password=abCD@1234
+#spring.r2dbc.pool.initial-size=10
+#spring.r2dbc.pool.max-size=20
