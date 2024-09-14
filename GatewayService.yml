@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gatewayService
+    name: GatewayService
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/distributedsystem
     username: distributedsystem
