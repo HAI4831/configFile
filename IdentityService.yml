@@ -24,6 +24,8 @@ jwt:
     password: abCD@1234
     refreshable-duration: 3600000
     valid-duration: 300000
+ACCESS_TOKEN_VALID_DURATION: 900  # 15 phút
+REFRESH_TOKEN_VALID_DURATION: 259200  # 3 ngày
 logging:
     level:
         io:
