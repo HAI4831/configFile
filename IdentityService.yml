@@ -1,3 +1,24 @@
+spring:
+    application:
+        name: IdentityService
+    main:
+        allow-bean-definition-overriding: true
+        web-application-type: reactive
+    r2dbc:
+        password: abCD@1234
+        pool:
+            initial-size: 10
+            max-size: 20
+        url: r2dbc:postgresql://localhost:5432/distributedsystem
+        username: distributedsystem
+    sql:
+        init:
+            data-locations: classpath:data.sql
+            mode: always
+            schema-locations: classpath:schema.sql
+    zipkin:
+        base-url: http://localhost:9411
+        enabled: true
 jwt:
     expiration-in-ms1: 3600000
     password: abCD@1234
@@ -26,27 +47,7 @@ management:
         enabled: true
 server:
     port: 8806
-spring:
-    application:
-        name: IdentityService
-    main:
-        allow-bean-definition-overriding: true
-        web-application-type: reactive
-    r2dbc:
-        password: abCD@1234
-        pool:
-            initial-size: 10
-            max-size: 20
-        url: r2dbc:postgresql://localhost:5432/distributedsystem
-        username: distributedsystem
-    sql:
-        init:
-            data-locations: classpath:data.sql
-            mode: always
-            schema-locations: classpath:schema.sql
-    zipkin:
-        base-url: http://localhost:9411
-        enabled: true
+
 ##application.properties
 #    spring.application.name=IdentityService
 #  #jwt.private-key=classpath:private_key.pem

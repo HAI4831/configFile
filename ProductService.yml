@@ -2,7 +2,7 @@ server:
     port: 8802
 spring:
     application:
-        name: productservice
+        name: ProductService
     r2dbc:
         password: abCD@1234
         pool:
